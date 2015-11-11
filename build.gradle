@@ -14,9 +14,12 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
         classpath('io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE')
+		classpath group: 'org.cloudfoundry', name: 'cf-gradle-plugin', version: '1.1.1'
+		
     }
 }
 
+apply plugin: 'cloudfoundry'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
