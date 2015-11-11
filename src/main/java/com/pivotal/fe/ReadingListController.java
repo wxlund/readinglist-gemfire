@@ -22,7 +22,7 @@ public class ReadingListController {
 	@RequestMapping(value = "/{reader}", method = RequestMethod.GET)
 	public String readersBooks(@PathVariable("reader") String reader,
 			Model model) {
-		Collection<Book> readingList = readingListRepository.findByReaderAnnotated(reader);
+		Collection<Book> readingList = readingListRepository.findByReader(reader);
 		if (readingList != null) {
 			model.addAttribute("books", readingList);
 		}

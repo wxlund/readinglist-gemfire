@@ -4,6 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.gemfire.CacheFactoryBean;
+import org.springframework.data.gemfire.LocalRegionFactoryBean;
+import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
+
+import com.gemstone.gemfire.cache.GemFireCache;
 
 @SpringBootApplication
 //@Configuration
@@ -11,13 +16,13 @@ import org.springframework.context.annotation.Bean;
 public class ReadinglistGemfireApplication {
 
 	@Bean
-	CacheFactoryBean cacheFactoryBean() {
+	CacheFactoryBean gemfireCache() {
 		return new CacheFactoryBean();
 	}
 
 	@Bean
 	LocalRegionFactoryBean<String, Book> localRegionFactory(final GemFireCache cache) {
-		return new LocalRegionFactoryBean<String, Person>() {{
+		return new LocalRegionFactoryBean<String, Book>() {{
 			setCache(cache);
 			setName("ReadingList");
 		}};

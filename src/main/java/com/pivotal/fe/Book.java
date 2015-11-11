@@ -1,5 +1,7 @@
 package com.pivotal.fe;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.gemfire.mapping.Region;
@@ -7,19 +9,25 @@ import org.springframework.data.gemfire.mapping.Region;
 @Region("ReadingList")
 public class Book {
 	@Id
-	private String id;
-	private String reader;
 	private String isbn;
+	private String reader;
 	private String title;
 	private String author;
 	private String description;
 
+	public Book() {
+		super();
+		this.isbn =  UUID.randomUUID().toString(); 
+	}
     @PersistenceConstructor
-    public Book(String id, String reader, String isbn, String title, String author, String description) {
-        this.id = id;
+    public Book(String isbn, String reader, String title, String author, String description) {
+    	if (isbn == null) {
+    		this.isbn =  UUID.randomUUID().toString(); 
+    	}
         this.reader = reader;
-        this.isbn = isbn;
         this.title = title;
+        this.author = author;
+        this.description = description;
     }
 
     @Override
@@ -27,14 +35,6 @@ public class Book {
         return reader + " is reading" + title + " by." + author;
     }	
     
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getReader() {
 		return reader;
 	}

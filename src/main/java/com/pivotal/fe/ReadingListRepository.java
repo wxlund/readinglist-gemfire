@@ -2,12 +2,14 @@ package com.pivotal.fe;
 
 import java.util.Collection;
 
-import org.springframework.context.annotation.Import;
-import org.springframework.data.gemfire.repository.GemfireRepository;
+import org.springframework.data.gemfire.mapping.Region;
+import org.springframework.data.gemfire.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ReadingListRepository extends GemfireRepository<Book, String> {
+@Region("ReadingList")
+public interface ReadingListRepository extends CrudRepository<Book, String> {
 
-	@Import("package com.pivotal.fe.Book")
-	Collection<Book> findByReaderAnnotated(String reader);
+	@Query("SELECT * FROM /ReadingList b WHERE b.reader = $1")
+	Collection<Book> findByReader(String reader);
 
 }
