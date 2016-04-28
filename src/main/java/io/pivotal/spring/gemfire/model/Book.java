@@ -1,4 +1,4 @@
-package com.pivotal.fe;
+package io.pivotal.spring.gemfire.model;
 
 import java.util.UUID;
 

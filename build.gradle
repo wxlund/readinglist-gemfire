@@ -44,7 +44,9 @@ repositories {
 
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-gemfire')
+    compile('org.springframework.boot:spring-boot-starter-data-gemfire') {
+    	exclude group: 'com.gemstone.gemfire'
+	}
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.gemstone.gemfire:gemfire:8.1.0')
