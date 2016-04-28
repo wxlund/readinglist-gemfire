@@ -7,9 +7,9 @@ buildscript {
 		jcenter()
 		maven { url "http://repo.spring.io/snapshot" }
 		maven { url "http://repo.spring.io/milestone" }
-		maven {
-			url "http://repo.spring.io/gemstone-release-cache"
-		}
+		maven { url "https://repo.spring.io/libs-snapshot" }
+		maven { url "http://repo.spring.io/gemstone-release-cache" }
+		maven { url "https://repository.apache.org/content/repositories/snapshots" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
@@ -37,17 +37,18 @@ repositories {
     mavenCentral()
 	maven { url "http://repo.spring.io/snapshot" }
 	maven { url "http://repo.spring.io/milestone" }
-	maven {
-		url "http://repo.spring.io/gemstone-release-cache"
-	}
+	maven {	url "http://repo.spring.io/gemstone-release-cache"	}
+	maven { url "https://repository.apache.org/content/repositories/snapshots" }
 }
 
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-gemfire')
+    compile('org.springframework.boot:spring-boot-starter-data-gemfire') {
+		exclude group: 'com.gemstone.gemfire'
+	}
+	compile('com.gemstone.gemfire:gemfire:8.1.0')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
-	compile('com.gemstone.gemfire:gemfire:8.1.0')
     testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
